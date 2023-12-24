@@ -1,4 +1,4 @@
-# Projeto Fullstack Node.js e Next.js
+# Projeto Fullstack Nestjs e Next.js
 
 Este projeto é uma aplicação fullstack que utiliza Nestjs no backend e Next.js no frontend.
 
