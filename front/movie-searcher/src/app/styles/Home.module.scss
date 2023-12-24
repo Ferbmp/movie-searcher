@@ -1,0 +1,16 @@
+.pageContainer {
+   padding: 24px 180px; // Adiciona um espaçamento lateral de 300px em cada lado
+   justify-content: center;
+   align-items: center;
+   display: flex;
+   flex-direction: column;
+   gap: 8rem;
+
+   @media (max-width: 1200px) {
+      padding: 0 50px;
+   }
+}
+
+.headerFooterFullWidth {
+   width: 100%;
+}
