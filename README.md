@@ -1,4 +1,4 @@
-# Projeto Fullstack Node.js e Next.js
+# Projeto Fullstack Nestjs e Next.js
 
 Este projeto é uma aplicação fullstack que utiliza Nestjs no backend e Next.js no frontend.
 
@@ -7,7 +7,7 @@ Este projeto é uma aplicação fullstack que utiliza Nestjs no backend e Next.j
 Antes de começar, você precisará ter as seguintes ferramentas instaladas em seu sistema:
 
 - [Git](https://git-scm.com)
-- [Node.js 18](https://nodejs.org/en/) (que inclui [npm](http://npmjs.com))
+- [Node.js > 18](https://nodejs.org/en/) (que inclui [npm](http://npmjs.com))
 - [Docker](https://docker.com/) (não obrigatório mas facilita a montagem do ambiente)
 - [Docker Compose](https://docs.docker.com/compose/install/)
 - [Make](https://www.gnu.org/software/make/) (para facilitar o uso de comandos)
