@@ -12,79 +12,77 @@ import { debounce } from "@/app/utils";
 import Spinner from "../../atoms/Spinner";
 
 interface SearchBarProps {
-   onMovieSelect: (movie: Movie) => any;
+  onMovieSelect: (movie: Movie) => void;
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({ onMovieSelect }) => {
-   const dispatch = useDispatch();
-   const searchTerm = useSelector((state: RootState) => state.movie.searchTerm); // Acessa o searchTerm diretamente
-   const [movies, setMovies] = useState<Movie[]>([]);
-   const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useDispatch();
+  const searchTerm = useSelector((state: RootState) => state.movie.searchTerm);
+  const [movies, setMovies] = useState<Movie[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
-   const debouncedFetchMovies = debounce(async (query: string) => {
-      setIsLoading(true);
-      const results = await fetchMovies({ query });
+  const debouncedFetchMovies = debounce(async (query: string) => {
+    setIsLoading(true);
+    const results = await fetchMovies({ query });
 
-      setTimeout(() => {
-         setIsLoading(false);
-      }, 700);
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 700);
 
-      setMovies(results);
-   }, 600);
+    setMovies(results);
+  }, 600);
 
-   const handleSearchChange = (newValue: string) => {
-      dispatch(setSearchTerm(newValue));
+  const handleSearchChange = (newValue: string) => {
+    dispatch(setSearchTerm(newValue));
 
-      if (newValue.trim().length >= 3) {
-         debouncedFetchMovies(newValue.trim());
-      } else {
-         setMovies([]);
-      }
-   };
-   const findSelectedMovie = (e: any) => {
-      const selectedMovie = movies.find(
-         (movie) => movie.title === e.target.typedInValue
-      );
+    if (newValue.trim().length >= 3) {
+      debouncedFetchMovies(newValue.trim());
+    } else {
+      setMovies([]);
+    }
+  };
+  const findSelectedMovie = (e: any) => {
+    const selectedMovie = movies.find(
+      (movie) => movie.title === e.target.typedInValue
+    );
 
-      if (selectedMovie) {
-         onMovieSelect(selectedMovie);
-      }
-   };
+    if (selectedMovie) {
+      onMovieSelect(selectedMovie);
+    }
+  };
 
-   return (
-      <div style={{ position: "relative" }}>
-         <Input
-            value={searchTerm}
-            onInput={(e) => handleSearchChange(e.target.value as string)}
-            showSuggestions
-            style={{ width: "482px" }}
-            placeholder='Type anything to show movie suggestions'
-            onSuggestionItemSelect={findSelectedMovie}
-         >
-            {movies.length > 0
-               ? movies.map((movie, index) => (
-                    <SuggestionItem key={index} text={movie.title} />
-                 ))
-               : !isLoading &&
-                 searchTerm.length > 3 && (
-                    <SuggestionItem text='No movies found' />
-                 )}
-         </Input>
+  return (
+    <div style={{ position: "relative" }}>
+      <Input
+        value={searchTerm}
+        onInput={(e) => handleSearchChange(e.target.value as string)}
+        showSuggestions
+        style={{ width: "482px" }}
+        placeholder="Type anything to show movie suggestions"
+        onSuggestionItemSelect={findSelectedMovie}
+      >
+        {movies.length > 0
+          ? movies.map((movie, index) => (
+              <SuggestionItem key={index} text={movie.title} />
+            ))
+          : !isLoading &&
+            searchTerm.length > 3 && <SuggestionItem text="No movies found" />}
+      </Input>
 
-         {isLoading && (
-            <div
-               style={{
-                  position: "absolute",
-                  right: "10px",
-                  top: "50%",
-                  transform: "translateY(-50%)",
-               }}
-            >
-               <Spinner />
-            </div>
-         )}
-      </div>
-   );
+      {isLoading && (
+        <div
+          style={{
+            position: "absolute",
+            right: "10px",
+            top: "50%",
+            transform: "translateY(-50%)",
+          }}
+        >
+          <Spinner />
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default SearchBar;
