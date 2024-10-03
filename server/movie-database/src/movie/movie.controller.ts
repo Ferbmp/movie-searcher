@@ -1,7 +1,7 @@
 // src/movie/movie.controller.ts
 import { Controller, Get, Query } from '@nestjs/common';
 import { MovieService } from './movie.service';
-import { MovieDto } from './dto/movie.dto'; // Importando o MovieDto
+import { MovieDto } from './dto/movie.dto';
 
 @Controller('movies')
 export class MoviesController {
